@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Supabase Test</title>
+</head>
+<body>
+
+<h2>Supabase Email Test</h2>
+
+<input type="email" id="email" placeholder="Enter email">
+<button id="saveBtn">Save Email</button>
+
+<p id="result"></p>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const SUPABASE_URL = 'https://cxkbvhqtyluxcmmmmxxm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4a2J2aHF0eWx1eGNtbW1teHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NzgzMDMsImV4cCI6MjA4MDI1NDMwM30.vzukNpEBoFxswLI5_lEYED1Ta64I_Dauoz4waLJg6kU';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+document.getElementById("saveBtn").onclick = async () => {
+    const email = document.getElementById("email").value.trim();
+    const result = document.getElementById("result");
+
+    result.style.color = "black";
+    result.textContent = "Saving...";
+
+    if (!email) {
+        result.textContent = "Email is required.";
+        result.style.color = "red";
+        return;
+    }
+
+    const { data, error } = await supabase
+        .from("test_emails")
+        .insert([{ email }]);
+
+    if (error) {
+        result.textContent = "Error: " + error.message;
+        result.style.color = "red";
+        console.error(error);
+    } else {
+        result.textContent = "Saved successfully!";
+        result.style.color = "green";
+        console.log(data);
+    }
+};
+</script>
+
+</body>
+</html>

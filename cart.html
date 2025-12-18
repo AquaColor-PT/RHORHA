@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RHORHA | Cart</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f0e6;
+    color: #000;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    width: 100%;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f0e6;
+    border-bottom: 2px solid #eee;
+  }
+  .logo { font-size: 28px; font-weight: 700; }
+  .logo span { color: skyblue; }
+  .nav-links a { margin-left: 20px; text-decoration: none; color: #000; font-weight: 500; }
+
+  /* CART CONTAINER */
+  .cart-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+  }
+
+  .cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .cart-item h3 {
+    margin: 0;
+  }
+
+  .cart-actions {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .qty-btn, .remove-btn, #purchaseBtn, #confirmPayment, #cancelPayment {
+    padding: 6px 12px;
+    margin: 4px 0;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .qty-btn { background: #eee; }
+  .qty-btn:hover { background: #ccc; }
+
+  .remove-btn { background: black; color: white; }
+  .remove-btn:hover { background: red; }
+
+  #purchaseBtn {
+    background: black; color: white;
+    padding: 12px 25px;
+    margin-top: 15px;
+  }
+  #purchaseBtn:hover { background: skyblue; color: black; }
+
+  .total {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  /* PAYMENT MODAL */
+  #paymentModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .modal-content a {
+    color: skyblue;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+
+  #confirmPayment { background: black; color: white; }
+  #confirmPayment:hover { background: skyblue; color: black; }
+
+  #cancelPayment { background: #ccc; }
+  #cancelPayment:hover { background: #999; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .cart-item { flex-direction: column; align-items: flex-start; }
+    .cart-actions { margin-left: 0; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">RHORHA<span>.</span></div>
+  <div class="nav-links">
+    <a href="shop.html">Shop</a>
+    <a href="index.html">Home</a>
+  </div>
+</div>
+
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <div class="total" id="cartTotal"></div>
+  <button id="purchaseBtn">Purchase</button>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal">
+  <div class="modal-content">
+    <h2>Payment Instructions</h2>
+    <p>Bank Name: Capitec Bank</p>
+    <p>Account Holder: Tokollo Simbini</p>
+    <p>Account Number: 1234567890</p>
+    <p>Type: Savings</p>
+    <p>Reference Number: <strong id="paymentRef"></strong></p>
+    <p>After payment, send proof via WhatsApp:</p>
+    <p><a href="https://wa.me/27648696744" target="_blank">Click to WhatsApp</a></p>
+    <div class="modal-buttons">
+      <button id="confirmPayment">Confirm Purchase</button>
+      <button id="cancelPayment">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="cart.js"></script>
+</body>
+</html>
